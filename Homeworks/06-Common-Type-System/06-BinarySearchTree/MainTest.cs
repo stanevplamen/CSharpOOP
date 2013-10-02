@@ -5,7 +5,7 @@ namespace BinarySearchTree
 {
     class MainTest
     {
-        static void Main(string[] args)   // TODO exception + unit tests
+        static void Main(string[] args)   
         {
             Console.WriteLine("Please wait few seconds for the first set of tests...");
             // First set of tests

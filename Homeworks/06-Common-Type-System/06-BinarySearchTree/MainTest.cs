@@ -5,7 +5,7 @@ namespace BinarySearchTree
 {
     class MainTest
     {
-        static void Main(string[] args)   
+        static void Main()   
         {
             Console.WriteLine("Please wait few seconds for the first set of tests...");
             // First set of tests

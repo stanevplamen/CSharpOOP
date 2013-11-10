@@ -53,18 +53,6 @@ namespace DocumentSystemNS
         public void Decrypt()
         {
             this.IsEncrypted = false;
-        }
-
-        public override string ToString()
-        {
-            if (this.IsEncrypted)
-            {
-                return this.GetType().Name + "[encrypted]";
-            }
-            else
-            {
-                return base.ToString();
-            }
-        }
+        }       
     }
 }

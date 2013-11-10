@@ -23,7 +23,7 @@ namespace DocumentSystemNS
 
         public override void LoadProperty(string key, string value)
         {
-            if (key == "samplerate")
+            if (key == "framerate")
             {
                 this.FRate = value;
             }

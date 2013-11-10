@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DocumentSystemNS
 {
-    public class PDF : BinaryDocument, IDocument
+    public class PDF : BinaryDocument, IDocument, IEncryptable
     {
         private int numberOfPages;
         public int NumberOfPages
@@ -31,6 +31,23 @@ namespace DocumentSystemNS
         {
             base.SaveAllProperties(output);
             output.Add(new KeyValuePair<string, object>("pages", this.NumberOfPages));
+        }
+
+        private bool isencrypted;
+        public bool IsEncrypted
+        {
+            get { return this.isencrypted; }
+            private set { this.isencrypted = value; }
+        }
+
+        public void Encrypt()
+        {
+            this.IsEncrypted = true;
+        }
+
+        public void Decrypt()
+        {
+            this.IsEncrypted = false;
         }
     }
 }

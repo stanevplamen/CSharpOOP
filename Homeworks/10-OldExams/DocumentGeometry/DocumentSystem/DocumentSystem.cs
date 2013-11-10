@@ -16,6 +16,7 @@ namespace DocumentSystemNS
 #endif
             IList<string> allCommands = ReadAllCommands();
             ExecuteCommands(allCommands);
+            Console.WriteLine(outputSB);
         }
 
         private static IList<string> ReadAllCommands()
@@ -122,7 +123,6 @@ namespace DocumentSystemNS
             else
             {
                 documentsList.Add(document);
-
                 return "Document added: " + document.Name;
             }
         }
@@ -159,29 +159,113 @@ namespace DocumentSystemNS
 
         private static void ListDocuments()
         {
-            Console.WriteLine(outputSB);
+            if (documentsList.Count > 0)
+            {
+                foreach (var doc in documentsList)
+                {
+                    outputSB.AppendLine(doc.ToString());
+                }
+            }
+            else
+            {
+                outputSB.AppendLine("No documents found");
+            }
         }
-
-        // TODO tommorow last part - vica + author solution
 
         private static void EncryptDocument(string name)
         {
-            // TODO
+            bool documentFound = false;
+            foreach (var doc in documentsList)
+            {
+                if (doc.Name == name)
+                {
+                    if ( doc is IEncryptable)
+                    {
+                        ((IEncryptable)doc).Encrypt();
+                        outputSB.AppendLine("Document encrypted: " + name);
+                    }
+                    else
+                    {
+                        outputSB.AppendLine("Document does not support encryption: " + name);
+                    }
+                    documentFound = true;
+                }
+            }
+            if (!documentFound)
+            {
+                outputSB.AppendLine("Document not found: " + name);
+            }
         }
 
         private static void DecryptDocument(string name)
         {
-            // TODO
+            bool documentFound = false;
+            foreach (var doc in documentsList)
+            {
+                if (doc.Name == name)
+                {
+                    if (doc is IEncryptable)
+                    {
+                        ((IEncryptable)doc).Decrypt();
+                        outputSB.AppendLine("Document decrypted: " + name);
+                    }
+                    else
+                    {
+                        outputSB.AppendLine("Document does not support decryption: " + name);
+                    }
+                    documentFound = true;
+                }
+            }
+            if (!documentFound)
+            {
+                outputSB.AppendLine("Document not found: " + name);
+            }
         }
 
         private static void EncryptAllDocuments()
         {
-            // TODO
+            bool documentFound = false;
+            foreach (var doc in documentsList)
+            {
+                if (doc is IEncryptable)
+                {
+                    ((IEncryptable)doc).Encrypt();
+                    documentFound = true;
+                }
+            }
+            if (documentFound)
+            {
+                outputSB.AppendLine("All documents encrypted");
+            }
+            else
+            {
+                outputSB.AppendLine("No encryptable documents found");
+            }
         }
 
         private static void ChangeContent(string name, string content)
         {
-            // TODO
+            bool documentFound = false;
+            foreach (var doc in documentsList)
+            {
+                if (doc.Name == name)
+                {
+                    if (doc is IEditable)
+                    {
+                        ((IEditable)doc).ChangeContent(content);
+                        outputSB.AppendLine("Document content changed: " + doc.Name);
+                    }
+                    else
+                    {
+                        outputSB.AppendLine("Document is not editable: " + doc.Name);
+                    }
+                    documentFound = true;
+                }
+            }
+            if (!documentFound)
+            {
+                outputSB.AppendLine("Document not found: " + name);
+            }
         }
     }
 }

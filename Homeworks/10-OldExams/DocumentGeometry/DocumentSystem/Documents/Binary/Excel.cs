@@ -28,7 +28,7 @@ namespace DocumentSystemNS
             {
                 this.NumberOfRows = long.Parse(value);
             }
-            if (key == "cols")
+            else if (key == "cols")
             {
                 this.NumberOfCols = long.Parse(value);
             }
@@ -60,18 +60,6 @@ namespace DocumentSystemNS
         public void Decrypt()
         {
             this.IsEncrypted = false;
-        }
-
-        public override string ToString()
-        {
-            if (this.IsEncrypted)
-            {
-                return this.GetType().Name + "[encrypted]";
-            }
-            else
-            {
-                return base.ToString();
-            }
         }
     }
 }

@@ -53,5 +53,31 @@ namespace DocumentSystemNS
             output.Add(new KeyValuePair<string, object>("name", this.Name));
             output.Add(new KeyValuePair<string, object>("content", this.Content));
         }
+
+        public override string ToString()
+        {
+            List<KeyValuePair<string, object>> properties =
+                new List<KeyValuePair<string, object>>();
+            this.SaveAllProperties(properties);
+            properties.Sort((a, b) => a.Key.CompareTo(b.Key));
+            StringBuilder result = new StringBuilder();
+            result.Append(this.GetType().Name);
+            result.Append("[");
+            bool first = true;
+            foreach (var prop in properties)
+            {
+                if (prop.Value != null)
+                {
+                    if (!first)
+                    {
+                        result.Append(";");
+                    }
+                    result.AppendFormat("{0}={1}", prop.Key, prop.Value);
+                    first = false;
+                }
+            }
+            result.Append("]");
+            return result.ToString();
+        }
     }
 }
